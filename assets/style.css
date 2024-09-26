@@ -1,0 +1,15 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+input, button {
+    padding: 2rem;
+    font-size: small;
+}
+
+.error-message {
+    color: red;           
+    font-style: italic;  
+    margin-top: 10px;      
+    display: block;        
+}
