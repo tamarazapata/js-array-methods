@@ -1,44 +1,44 @@
 const form = document.getElementById('form');
-const input = document.getElementById('movie-input'); 
-const movieList = document.getElementById('movieList');
+const input = document.getElementById('task-input'); 
+const toDoList = document.getElementById('to-do-list');
 const label = document.createElement('label'); 
 
 
 label.classList.add('error-message'); 
 
-let movies = [
-    { id: 1, title: 'The Shawshank Redemption', watched: false },
-    { id: 2, title: 'Inception', watched: false },
-    { id: 3, title: 'The Matrix', watched: false }
+let tasks = [
+    { id: 1, title: 'Sacar la basura', markedAsDone: false },
+    { id: 2, title: 'Comprar parafina', markedAsDone: false },
+    { id: 3, title: 'Tender la ropa', markedAsDone: false }
 ];
 
-const totalMovies = document.getElementById('total-movies');
-const moviesWatched = document.getElementById('movies-watched');
+const totalTasks = document.getElementById('total-tasks');
+const tasksDone = document.getElementById('tasks-done');
 
 document.addEventListener("DOMContentLoaded", () => {
-    initialMovies();
-    countMovies();
+    initialTaks();
+    countTasks();
 });
 
 form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const movieTitle = input.value.trim(); 
+    const taskTitle = input.value.trim(); 
 
-    if (movieTitle) {
-        const movieExists = movies.some(movie => movie.title.toLowerCase() === movieTitle.toLowerCase());
+    if (taskTitle) {
+        const taskExist = tasks.some(task => task.title.toLowerCase() === taskTitle.toLowerCase());
 
-        if (movieExists) {
-            label.innerHTML = 'El título de la película ya existe';  
+        if (taskExist) {
+            label.innerHTML = 'Esta tarea ya existe';  
             form.appendChild(label);  
         } else {
-            const newMovie = {
+            const newTask = {
                 id: Date.now(),
-                title: movieTitle,
-                watched: false
+                title: taskTitle,
+                markedAsDone: false
             };
-            movies.push(newMovie);  
-            initialMovies();  
+            tasks.push(newTask);  
+            initialTaks();  
             input.value = '';  
             label.innerHTML = '';  
         }
@@ -48,48 +48,43 @@ form.addEventListener('submit', (event) => {
     }
 });
 
-const initialMovies = () => {
+const initialTaks = () => {
     let template = '';
-    for (const movie of movies) {
-        template += createElement(movie);  
-    movieList.innerHTML = template;  
+    for (const task of tasks) {
+        template += createElement(task);  
+    toDoList.innerHTML = template;  
 };
 }
 
-function createElement(movie) {
+function createElement(task) {
     return `
-        <div class="alert ${movie.watched ? 'alert-success' : 'alert-secondary'} d-flex justify-content-between align-items-center">
-            <p class="m-0">${movie.title}</p>
+        <div class="alert ${task.markedAsDone ? 'alert-success' : 'alert-secondary'} d-flex justify-content-between align-items-center">
+            <p class="m-0">${task.title}</p>
             <h3 class="m-0">
-                <i class="fa-solid fa-eye" role="button" onclick="watchedMovies(${movie.id})"></i>
-                <i class="fa-solid fa-trash" role="button" onclick="deleteMovies(${movie.id})"></i>
+                <i class="fa-solid fa-check" role="button" onclick="taskDone(${task.id})"></i>
+                <i class="fa-solid fa-trash" role="button" onclick="deleteTask(${task.id})"></i>
             </h3>
         </div>
     `;
 }
-function watchedMovies(id) {
-    const indexMovie = movies.findIndex((movie) => movie.id === id);
-    movies[indexMovie].watched = movies[indexMovie].watched ? false : true;
-    initialMovies();  
-    countMovies();
+function taskDone(id) {
+    const indexTask = tasks.findIndex((task) => task.id === id);
+    tasks[indexTask].markedAsDone = tasks[indexTask].markedAsDone ? false : true;
+    initialTaks();  
+    countTasks();
 }
 
-function deleteMovies(id) {
-    const indexMovie = movies.findIndex((movie) => movie.id === id);
-    movies.splice(indexMovie,1) 
-    initialMovies(); 
-    countMovies();
+function deleteTask(id) {
+    const indexTask = tasks.findIndex((task) => task.id === id);
+    tasks.splice(indexTask,1) 
+    initialTaks(); 
+    countTasks();
 }
 
-function editMovies(id) {
-    const indexMovie = movies.findIndex((movie) => movie.id === id);
 
-    initialMovies(); 
-    countMovies();
-}
-function countMovies (){
-    totalMovies.innerHTML =  `Total de películas: ${movies.length}`;
-    const totalWatchedMovies = movies.filter((m) => m.watched == true)
-    moviesWatched.innerHTML = `Películas vistas: ${totalWatchedMovies.length}`
+function countTasks (){
+    totalTasks.innerHTML =  `Total de tareas: ${tasks.length}`;
+    const totalTasksDone = tasks.filter((m) => m.markedAsDone == true)
+    tasksDone.innerHTML = `Tareas realizadas: ${totalTasksDone.length}`
 }
 

@@ -1,10 +1,82 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Work Sans', sans-serif;
+    min-height: 100vh;
+    padding-top: 3%;
 }
-input, button {
-    padding: 2rem;
-    font-size: small;
+
+
+#header {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-size: 3rem;
+    min-height: 25vh;
+    width: 100%;
+}
+
+#title {
+    font-size: larger;
+    white-space: pre;
+    overflow: hidden;     
+    letter-spacing: 0.20rem;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    max-width: 500px;
+}
+
+form {
+    display: flex;
+    font-size: 1.7rem;
+    justify-content: center;
+    margin: 10px 0;
+    width: 100vh;
+}
+
+form input {
+    padding: 10px;
+    font-size: 17px;
+    border: none;
+    outline: none;
+    /* border-radius: 15; */
+    border-top-left-radius: 17px;
+    border-bottom-left-radius: 17px;
+    max-width: 500px;
+    width: 100%;
+    background-color: #AEB1B4;
+    color: #1a150e;
+}
+
+form input:hover {
+    cursor: text;
+}
+
+button {
+    border: none;
+    outline: none; 
+    transition: box-shadow 200ms ease, background-color 200ms ease-in-out;
+    background-color: #002837;
+    color: white;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+form button {
+    padding: 10px;
+    font-size: 17px;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    min-width: 100px;
+}
+
+#to-do-list {
+    max-width: 100%;
+    width: 80vh;
 }
 
 .error-message {
