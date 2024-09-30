@@ -46,6 +46,7 @@ form.addEventListener('submit', (event) => {
         label.innerHTML = 'Debes ingresar un título válido';  
         form.appendChild(label);  
     }
+    countTasks();
 });
 
 const initialTaks = () => {
@@ -75,10 +76,18 @@ function taskDone(id) {
 }
 
 function deleteTask(id) {
+
     const indexTask = tasks.findIndex((task) => task.id === id);
-    tasks.splice(indexTask,1) 
-    initialTaks(); 
-    countTasks();
+
+    if (indexTask !== -1) {
+        tasks.splice(indexTask, 1); 
+        initialTaks();  
+        countTasks();  
+    }
+
+    if (tasks.length === 0) {
+        toDoList.innerHTML = 'Todo limpio. Por acá no vuela una mosca 🪰'; 
+    }
 }
 
 

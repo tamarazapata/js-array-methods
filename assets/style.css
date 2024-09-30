@@ -85,3 +85,10 @@ form button {
     margin-top: 10px;      
     display: block;        
 }
+
+.error-message {
+    color: red;           
+    font-style: italic;  
+    margin-top: 10px;      
+    display: block;        
+}
